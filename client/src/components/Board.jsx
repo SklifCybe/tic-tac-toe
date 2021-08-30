@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, NavLink } from 'react-router-dom';
 
 import { setPlayer, setBoard, setWinner } from '../redux/actions/game';
+import { setRoomId, setRoomIdd, setUserName } from '../redux/actions/join';
 import { useWinner } from '../hooks/winner-hook';
 
 export function Board() {
@@ -31,6 +32,13 @@ export function Board() {
     dispatch(setBoard(board));
   };
 
+  const exitHandler = () => {
+    dispatch(setRoomId(''));
+    dispatch(setUserName(''));
+    dispatch(setBoard(Array(9).fill('')));
+    dispatch(setPlayer('O'));
+  };
+
   return (
     <>
       <div className="board">
@@ -40,7 +48,9 @@ export function Board() {
           </div>
         ))}
       </div>
-      <NavLink className="button" to="/">Выйти</NavLink>
+      <NavLink className="button" to="/" onClick={exitHandler}>
+        Выйти
+      </NavLink>
     </>
   );
 }
