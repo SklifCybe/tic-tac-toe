@@ -1,0 +1,113 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Arial", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: rgba(0, 4, 255, 0.479);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -50%);
+
+  h1 {
+    color: white;
+    text-shadow: rgba(0, 0, 0, 0.75) 1px 0 4px;
+    text-transform: uppercase;
+    font-style: italic
+  }
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  text-align: center;
+  font-size: 100px;
+
+  &__cell {
+    border: 1px solid black;
+    cursor: pointer;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
+
+  &__cell:nth-child(1),
+  &__cell:nth-child(2),
+  &__cell:nth-child(3) {
+    border-top: none;
+  }
+
+  &__cell:nth-child(3),
+  &__cell:nth-child(6),
+  &__cell:nth-child(9) {
+    border-right: none;
+  }
+
+  &__cell:nth-child(7),
+  &__cell:nth-child(8),
+  &__cell:nth-child(9) {
+    border-bottom: none;
+  }
+
+  &__cell:nth-child(1),
+  &__cell:nth-child(4),
+  &__cell:nth-child(7) {
+    border-left: none;
+  }
+}
+
+.join {
+  display: flex;
+  flex-direction: column;
+
+  input {
+    margin-bottom: 10px;
+    height: 30px;
+    width: 190px;
+    border: 1px solid rgb(99, 99, 99);
+    padding: 3px 0 3px 10px;
+    border-radius: 3px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.button {
+    margin-top: 10px;
+    height: 25px;
+    width: 100%;
+    border: 0;
+    cursor: pointer;
+    background-color: rgb(53, 53, 255);
+    color: white;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: darken(rgb(53, 53, 255), 5)
+    }
+
+    &:active {
+      background-color: darken(rgb(53, 53, 255), 20);
+    }
+
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

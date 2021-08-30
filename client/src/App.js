@@ -1,23 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { Route } from 'react-router-dom';
+
+import { Board } from './components/Board';
+import { JoinBlock } from './components/JoinBlock';
+import { Congratulation } from './components/Congratulation';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="wrapper">
+      <h1>крестики нолики</h1>
+      <Route exact path="/" component={JoinBlock} />
+      <Route exact path="/game" component={Board} />
+      <Route exact path="/congratulation" component={Congratulation} />
     </div>
   );
 }
