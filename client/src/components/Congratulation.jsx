@@ -7,9 +7,9 @@ export function Congratulation() {
 
   return (
     <div className="congratulation">
-      <h2>{player === 'DRAW' ? 'Ничья' : `Победил "${player}"`}</h2>
+      <h2>{player === 'DRAW' ? 'Draw' : `Win "${player}"`}</h2>
       <NavLink className="button" to="/game">
-        Заново
+        Repeat
       </NavLink>
     </div>
   );

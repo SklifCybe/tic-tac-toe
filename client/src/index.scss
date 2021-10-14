@@ -1,37 +1,40 @@
-body {
+* {
+  font-family: 'Arial';
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Arial", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
-    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: rgba(0, 4, 255, 0.479);
+  padding: 0;
+  box-sizing: border-box;
+  list-style-type: none;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+#root {
+  height: 100vh;
+  display: flex;
 }
 
 .wrapper {
   display: flex;
-  align-items: center;
   flex-direction: column;
-  position: absolute;
-  left: 50%;
-  top: 40%;
-  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: 100vh;
 
   h1 {
     color: white;
     text-shadow: rgba(0, 0, 0, 0.75) 1px 0 4px;
     text-transform: uppercase;
-    font-style: italic
+    font-style: italic;
   }
 }
 
+.title {
+  align-self: center;
+  margin: 2rem 0;
+}
+
 .board {
-  display: grid;
-  grid-template-columns: repeat(3, auto);
-  text-align: center;
+  display: flex;
+  align-self: center;
+  width: 300px;
+  flex-wrap: wrap;
   font-size: 100px;
 
   &__cell {
@@ -42,7 +45,7 @@ code {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: #000;
   }
 
   &__cell:nth-child(1),
@@ -73,6 +76,8 @@ code {
 .join {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
   input {
     margin-bottom: 10px;
@@ -86,28 +91,58 @@ code {
       outline: none;
     }
   }
+
+  button {
+    width: 10rem;
+  }
+}
+
+.congratulation {
+  display: flex;
+  align-self: center;
+  width: 15rem;
+  flex-direction: column;
+  text-align: center;
 }
 
 .button {
-    margin-top: 10px;
-    height: 25px;
-    width: 100%;
-    border: 0;
-    cursor: pointer;
-    background-color: rgb(53, 53, 255);
-    color: white;
-    border-radius: 5px;
+  margin-top: 10px;
+  height: 25px;
+  width: 100%;
+  border: 0;
+  cursor: pointer;
+  background-color: rgb(53, 53, 255);
+  color: white;
+  border-radius: 5px;
+  font-size: 1rem;
 
-    &:hover {
-      background-color: darken(rgb(53, 53, 255), 5)
-    }
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    &:active {
-      background-color: darken(rgb(53, 53, 255), 20);
-    }
+  &.exit {
+    margin-top: 2rem;
+  }
 
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  &:hover {
+    background-color: darken(rgb(53, 53, 255), 5);
+  }
+
+  &:active {
+    background-color: darken(rgb(53, 53, 255), 20);
+  }
+}
+
+.userlist {
+  position: absolute;
+  left: 5rem;
+  top: 5rem;
+  border: 1px solid rgb(206, 206, 206);
+  padding: 1rem 1rem 0 1rem;
+  border-radius: 10px;
+
+  li {
+    margin-bottom: 1rem;
+  }
 }

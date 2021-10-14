@@ -1,43 +1,70 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useFormik } from 'formik';
 
-import { setRoomId, setUserName } from '../redux/actions/join';
+const validate = (values) => {
+  const errors = {};
 
-export function JoinBlock() {
-  const dispatch = useDispatch();
-  const { roomId, userName } = useSelector(({ join }) => join);
-  const history = useHistory();
+  if (!values.roomId) {
+    errors.roomId = 'Required';
+  } else if (values.roomId.length > 4) {
+    errors.roomId = 'Must be 4 characters or less';
+  }
 
-  const changeRoomId = (event) => {
-    dispatch(setRoomId(event.target.value));
-  };
+  if (!values.userName) {
+    errors.userName = 'Required';
+  } else if (values.userName.length > 15) {
+    errors.userName = 'Must be 15 characters or less';
+  }
 
-  const changeUserName = (event) => {
-    dispatch(setUserName(event.target.value));
-  };
+  return errors;
+};
 
-  const enterHandler = () => {
-    if (!roomId || !userName) {
-      if (!roomId && userName) {
-        return alert('Введите номер комнаты.');
+const initialValues = {
+  roomId: '',
+  userName: '',
+};
+
+export function JoinBlock({ setIsShowBoard, socket }) {
+  const formik = useFormik({
+    initialValues,
+    validate,
+    onSubmit: (values) => {
+      console.log(values);
+      socket.emit('JOIN:ROOM', { ...values });
+      setIsShowBoard(true);
+    },
+  });
+
+  const onJoinClick = () => {
+    if (formik.errors) {
+      if (formik.errors.roomId) {
+        alert(`Room ID: ${formik.errors.roomId}`);
       }
-      if (!userName && roomId) {
-        return alert('Введите имя пользователя.');
+      if (formik.errors.userName) {
+        alert(`User Name: ${formik.errors.userName}`);
       }
-      return alert('Введите данные.');
     }
-
-    history.push('/game');
   };
 
   return (
-    <div className="join">
-      <input type="text" placeholder="Номер комнаты" values={roomId} onChange={changeRoomId} />
-      <input type="text" placeholder="Имя" values={userName} onChange={changeUserName} />
-      <div>
-        <button className="button" onClick={enterHandler}>Вход</button>
-      </div>
-    </div>
+    <form className="join" onSubmit={formik.handleSubmit}>
+      <input
+        type="text"
+        name="userName"
+        placeholder="Name"
+        value={formik.values.userName}
+        onChange={formik.handleChange}
+      />
+      <input
+        type="text"
+        name="roomId"
+        placeholder="Room ID"
+        value={formik.values.roomId}
+        onChange={formik.handleChange}
+      />
+      <button type="submit" className="button" onClick={onJoinClick}>
+        Join
+      </button>
+    </form>
   );
 }

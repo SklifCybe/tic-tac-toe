@@ -1,19 +1,18 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import {io} from 'socket.io-client'
 
-import { Board } from './components/Board';
-import { JoinBlock } from './components/JoinBlock';
-import { Congratulation } from './components/Congratulation';
+import { useRoutes } from './routes';
 
-function App() {
+const socket = io('http://localhost:5050');
+
+export const App = () => {
+  const [isShowBoard, setIsShowBoard] = React.useState(false);
+  const routes = useRoutes(isShowBoard, setIsShowBoard, socket);
+
   return (
     <div className="wrapper">
-      <h1>крестики нолики</h1>
-      <Route exact path="/" component={JoinBlock} />
-      <Route exact path="/game" component={Board} />
-      <Route exact path="/congratulation" component={Congratulation} />
+      <h1 className="title">tic tac toe</h1>
+      {routes}
     </div>
   );
-}
-
-export default App;
+};
